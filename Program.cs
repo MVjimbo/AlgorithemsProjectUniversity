@@ -10,9 +10,9 @@ namespace Algorithms
     {
         static void swap<T>(ref T a, ref T b) { T c = a; a = b; b = c; }
 
-        static void buildHeap(ref double[] arr, int n,ref int count)
+        static void buildHeap(ref double[] arr, int n, ref int count)
         {
-            for (int i=n/2-1;i>=0;i-=1)
+            for (int i = n / 2 - 1; i >= 0; i -= 1)
             {
                 int k = i;
                 double c = arr[i];
@@ -64,13 +64,13 @@ namespace Algorithms
             int count = 0;
             //Первый этап сортировки
             int n = arr.Length;
-            buildHeap(ref arr, n,ref count);
+            buildHeap(ref arr, n, ref count);
 
             //Второй этап сортировки
             swap(ref arr[0], ref arr[n - 1]);
-            for (int i=n-1;i>=2;i-=1)
+            for (int i = n - 1; i >= 2; i -= 1)
             {
-                Heap(ref arr, i,ref count);
+                Heap(ref arr, i, ref count);
                 swap(ref arr[0], ref arr[i - 1]);
             }
             return count;
@@ -80,35 +80,38 @@ namespace Algorithms
         {
             //Генерация входных данных: массив длины n с элементами в диапазоне [a,b]
             Random rand = new Random();
-            int n = 6400;
+            int n = 10000;
             double a = -100.0;
             double b = 100.0;
             double[] arr = new double[n];
-            for (int i = 0; i < n; i += 1)
-                arr[i] = rand.NextDouble() * (b-a) + a;
 
-            /*Console.WriteLine("Before");
-            for (int i = 0; i < n; i += 1)
-                Console.Write($"{arr[i]} ");*/
-
-            int count=HeapSort(ref arr);
-            Console.WriteLine(count);
-            /*Console.WriteLine("\nAfter");
-            for (int i = 0; i < n; i += 1)
-                Console.Write($"{arr[i]} ");*/
-
-            //Проверка на упорядоченность
+            int count=0;//Счетчик
             var isSorted = true;
-            for (int i=0;i<n-1;i+=1)
-                if(arr[i]>arr[i+1])
-                {
-                    isSorted = false;
+            for (int q = 0; q < 3; q += 1)
+            {
+                for (int i = 0; i < n; i += 1)
+                    arr[i] = rand.NextDouble() * (b - a) + a;
+
+                count += HeapSort(ref arr);
+
+                //Проверка на упорядоченность
+                for (int i = 0; i < n - 1; i += 1)
+                    if (arr[i] > arr[i + 1])
+                    {
+                        isSorted = false;
+                        break;
+                    }
+
+                if (!isSorted)
                     break;
-                }
+            }
+
             if (isSorted)
                 Console.WriteLine("OK");
             else
                 Console.WriteLine("Not sorted");
+
+            Console.WriteLine(count/3.0);
 
             Console.ReadKey();
         }
