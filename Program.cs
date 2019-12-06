@@ -87,7 +87,7 @@ namespace Algorithms
 
             int count=0;//Счетчик
             var isSorted = true;
-            for (int q = 0; q < 3; q += 1)
+            for (int q = 0; q < 5; q += 1)
             {
                 for (int i = 0; i < n; i += 1)
                     arr[i] = rand.NextDouble() * (b - a) + a;
@@ -111,7 +111,7 @@ namespace Algorithms
             else
                 Console.WriteLine("Not sorted");
 
-            Console.WriteLine(count/3.0);
+            Console.WriteLine(count/5.0);
 
             Console.ReadKey();
         }
